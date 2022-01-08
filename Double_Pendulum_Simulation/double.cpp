@@ -8,7 +8,9 @@ int main(){
     const unsigned int W = 1400;
     const unsigned int H = 1400;
     const double pi = 3.14159265359;
-    
+
+    // sf::ContextSettings settings;
+    // settings.antialiasingLevel = 16.0;
     sf::RenderWindow window(sf::VideoMode(W,H), "Pendulum", sf::Style::Default);
     
     window.setFramerateLimit(120);
@@ -72,13 +74,17 @@ int main(){
             sf::Vertex(pos1),
             sf::Vertex(pos2)
         };
+        int offset = 0;
+        if(i/1000!=0){
+            offset = i%1000;
+        }
         line1->color = sf::Color::White;
         window.draw(line2, 2,sf::Lines);
         for(int j = 1;j<1000;j++){
-            if(path[(i+j)%1000].x==0 && path[(i+j)%1000].y==0) break;
+            if(path[(offset+j)%1000].x==0 && path[(offset+j+1)%1000].y==0 || path[(offset+j+1)%1000].x==0 && path[(offset+j+1)%1000].y==0 ) break;
             sf::Vertex p[] = {
-                sf::Vertex(path[(i+j)%1000],sf::Color::Red),
-                sf::Vertex(path[(i+j+1)%1000],sf::Color::Red)
+                sf::Vertex(path[(offset+j)%1000],sf::Color(82, 223, 255)),
+                sf::Vertex(path[(offset+j+1)%1000],sf::Color(82, 223, 255))
             };
             window.draw(p,2,sf::Lines);
         }
