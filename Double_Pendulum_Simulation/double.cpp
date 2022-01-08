@@ -77,8 +77,8 @@ int main(){
         for(int j = 1;j<1000;j++){
             if(path[(i+j)%1000].x==0 && path[(i+j)%1000].y==0) break;
             sf::Vertex p[] = {
-                sf::Vertex(path[(i+j)%1000]),
-                sf::Vertex(path[(i+j+1)%1000])
+                sf::Vertex(path[(i+j)%1000],sf::Color::Red),
+                sf::Vertex(path[(i+j+1)%1000],sf::Color::Red)
             };
             window.draw(p,2,sf::Lines);
         }
